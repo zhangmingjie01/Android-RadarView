@@ -33,7 +33,6 @@ public class CustomImageView extends ImageView {
 
     private void init() {
         paint = new Paint();
-        paint.setColor(Color.BLUE);
         paint.setStyle(Paint.Style.FILL);
         paint.setStrokeWidth(2);
 
@@ -55,15 +54,27 @@ public class CustomImageView extends ImageView {
         float centerY = height / 2f;
         float scale = Math.min(width, height) / 10f;
 
+        // 将4dp转换为像素值
+        float dp8 = 8 * getResources().getDisplayMetrics().density;
+        float dp4 = 4 * getResources().getDisplayMetrics().density;
+
         // 绘制坐标点
         for (int i = 0; i < points.length; i += 2) {
             float x = centerX + points[i] * scale;
             float y = centerY - points[i + 1] * scale;
-            canvas.drawCircle(x, y, 2f, paint);
+
+            // 绘制大圆
+            paint.setColor(Color.parseColor("#1AAE6C32"));
+            canvas.drawCircle(x, y, dp8, paint);
+
+            // 绘制小圆
+            paint.setColor(Color.parseColor("#AE6C32"));
+            canvas.drawCircle(x, y, dp4, paint);
         }
 
         // 绘制连线
         paint.setColor(Color.parseColor("#1AAE6C32"));
+        paint.setStrokeWidth(2 * getResources().getDisplayMetrics().density); // 设置线宽为2dp
         path.reset();
         for (int i = 0; i < points.length; i += 2) {
             float x = centerX + points[i] * scale;
@@ -75,6 +86,11 @@ public class CustomImageView extends ImageView {
             }
         }
         path.close();
+        canvas.drawPath(path, paint);
+
+        // 填充区域
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.parseColor("#1AAE6C32"));
         canvas.drawPath(path, paint);
     }
 }
