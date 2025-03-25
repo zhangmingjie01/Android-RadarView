@@ -38,6 +38,17 @@ public class MainActivity extends AppCompatActivity {
         radarView.setDataList(dataList);
     }
 
+    public void do4Test(View v){
+        RadarView radarView = (RadarView) findViewById(R.id.radarView);
+
+        List<RadarData> dataList = new ArrayList<>();
+        for (int i = 1; i < 5; i++) {
+            RadarData data = new RadarData("标题" + i, i * 11);
+            dataList.add(data);
+        }
+        radarView.setDataList(dataList);
+    }
+
     public void do6Test(View v){
         RadarView radarView = (RadarView) findViewById(R.id.radarView);
 
