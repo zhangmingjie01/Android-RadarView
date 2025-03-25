@@ -47,6 +47,8 @@ public class CustomImageView extends ImageView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        init();
+
         int width = getWidth();
         int height = getHeight();
         float centerX = width / 2f;
