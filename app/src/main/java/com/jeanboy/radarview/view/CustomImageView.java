@@ -33,9 +33,8 @@ public class CustomImageView extends ImageView {
 
     private void init() {
         paint = new Paint();
-        paint.setStyle(Paint.Style.FILL);
         paint.setStrokeWidth(2);
-
+        paint.setStyle(Paint.Style.FILL);
         path = new Path();
     }
 
@@ -72,9 +71,9 @@ public class CustomImageView extends ImageView {
             canvas.drawCircle(x, y, dp4, paint);
         }
 
-        // 绘制连线
+        // 绘制连线区域
+        paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.parseColor("#1AAE6C32"));
-        paint.setStrokeWidth(2 * getResources().getDisplayMetrics().density); // 设置线宽为2dp
         path.reset();
         for (int i = 0; i < points.length; i += 2) {
             float x = centerX + points[i] * scale;
@@ -88,9 +87,10 @@ public class CustomImageView extends ImageView {
         path.close();
         canvas.drawPath(path, paint);
 
-        // 填充区域
-        paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.parseColor("#1AAE6C32"));
+        // 绘制连线
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setColor(Color.parseColor("#AE6C32"));
+        paint.setStrokeWidth(2 * getResources().getDisplayMetrics().density); // 设置线宽为2dp
         canvas.drawPath(path, paint);
     }
 }
